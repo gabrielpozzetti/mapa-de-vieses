@@ -257,6 +257,7 @@ function submitLead(form) {
   }, trackingData());
 
   saveLead(row).catch(function (e) { console.warn("Lead não salvo", e); }).then(function () {
+    try { if (window.fbq) window.fbq("track", "Lead", { content_name: "mapa-de-vieses" }); } catch (e) { /* sem pixel */ }
     state.sending = false;
     state.lead = { nome: nome };
     state.view = "result";
